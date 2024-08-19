@@ -10,6 +10,9 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Set environment variables for SageMaker multi-model support
+LABEL com.amazonaws.sagemaker.capabilities.multi-models=true
+
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
 
@@ -17,6 +20,5 @@ EXPOSE 8080
 ENV NAME World
 
 # Run inference.py when the container launches
-ENTRYPOINT ["python"]
-CMD ["scripts/inference.py"]
+ENTRYPOINT ["python", "scripts/inference.py"]
 
