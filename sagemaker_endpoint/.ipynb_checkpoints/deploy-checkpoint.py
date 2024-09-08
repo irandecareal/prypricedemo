@@ -3,7 +3,7 @@ from sagemaker.sklearn.model import SKLearnModel
 
 s3_client = boto3.client('s3')
 bucket = 'bk-price-prediction-data'
-model_key = 'model/model.tar.gz'
+model_key = 'model/model_beef.tar.gz'
 role = 'rol-predict-price'
 # Specify the desired framework and Python versions
 framework_version = '0.23-1'  # Example: Scikit-learn version 0.23-1
@@ -22,4 +22,4 @@ model = SKLearnModel(
 )
 
 predictor = model.deploy(instance_type='ml.m4.xlarge', initial_instance_count=1,
-                         endpoint_name='price-prediction-endpoint')
+                         endpoint_name='price-prediction-endpoint-modal')

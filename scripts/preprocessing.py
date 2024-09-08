@@ -40,10 +40,6 @@ def upload_model_s3(name_model, bucket):
     s3_client.upload_file(model_file_path, bucket, f'model/{name_model}.joblib')
     print('upload s3')
 
-
-def smape(true, pred):
-    return np.mean(2 * np.abs(pred - true) / (np.abs(pred) + np.abs(true))) * 100
-
 def mape(true, pred):
     return np.mean(np.abs((true - pred) / true)) * 100
     
@@ -52,7 +48,6 @@ def calculate_metrics(true_values, predictions):
     mae = mean_absolute_error(true_values, predictions)
     mse = mean_squared_error(true_values, predictions)
     rmse = mse**0.5
-    smape_value = smape(true_values, predictions)
     mape_value = mape(true_values, predictions)
 
     # Crear una tabla con los resultados
@@ -60,7 +55,6 @@ def calculate_metrics(true_values, predictions):
         ["MAE", mae],
         ["MSE", mse],
         ["RMSE", rmse],
-        ["SMAPE", smape_value],
         ["MAPE", mape_value]
     ]
     return results
